@@ -48,7 +48,6 @@ var albumPicasso = {
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
-      + '  <td class="song-item-number">' + songNumber + '</td>'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
       + '  <td class="song-item-duration">' + songLength + '</td>'
@@ -59,13 +58,16 @@ var albumPicasso = {
  };
 
 // Select elements that we want to populate with text dynamically
+
 var albumTitle = document.getElementsByClassName('album-view-title')[0];
 var albumArtist = document.getElementsByClassName('album-view-artist')[0];
 var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
 var albumImage = document.getElementsByClassName('album-cover-art')[0];
 var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
+
 var setCurrentAlbum = function(album) {
+
      // Assign value to each part of the album (text, images...)
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -103,7 +105,8 @@ var setCurrentAlbum = function(album) {
              // Selects first child element, which is the song-item-number element
              this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
          });
-     }
+     };
+
 
      var albums = [albumPicasso, albumMarconi, albumPanini];
      var index = 1;
@@ -114,4 +117,4 @@ var setCurrentAlbum = function(album) {
             index = 0;
         }
      });
- };
+};
