@@ -90,7 +90,7 @@ var findParentByClassName = function(element, targetClass) {
             currentParent = currentParent.parentElement;
         }
         return currentParent;
-    }
+        }
 };
 
 var getSongItem = function(element) {
