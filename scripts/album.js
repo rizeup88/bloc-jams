@@ -1,5 +1,5 @@
-var createSongRow = function(songNumber, songName, songLength) {
-    var template =
+ var createSongRow = function(songNumber, songName, songLength) {
+     var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
@@ -7,9 +7,9 @@ var createSongRow = function(songNumber, songName, songLength) {
       + '</tr>'
       ;
  
-    var $row = $(template);
+     var $row = $(template);
 
-    var clickHandler = function() {
+     var clickHandler = function() {
         var songNumber = $(this).attr('data-song-number');
 
         if (currentlyPlayingSongNumber !== null) {
@@ -30,33 +30,30 @@ var createSongRow = function(songNumber, songName, songLength) {
             currentlyPlayingSongNumber = null;
             currentSongFromAlbum = null;
         }
-    };
+     };
 
-    var onHover = function(event) {
+     var onHover = function(event) {
         var songNumberCell = $(this).find('.song-item-number');
         var songNumber = songNumberCell.attr('data-song-number');
 
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(playButtonTemplate);
         }
-    };
+     };
 
-    var offHover = function(event) {
+     var offHover = function(event) {
         var songNumberCell = $(this).find('.song-item-number');
         var songNumber = songNumberCell.attr('data-song-number');
 
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(songNumber);
         }
-    };
+     };
 
      $row.find('.song-item-number').click(clickHandler);
      $row.hover(onHover, offHover);
      return $row;
  };
-
-// Select elements that we want to populate with text dynamically
-
 
 var setCurrentAlbum = function(album) {
      currentAlbum = album;
@@ -65,7 +62,7 @@ var setCurrentAlbum = function(album) {
      var $albumReleaseInfo = $('.album-view-release-info');
      var $albumImage = $('.album-cover-art');
      var $albumSongList = $('.album-view-song-list');
-     // Assign value to each part of the album (text, images...)
+
      $albumTitle.text(album.title);
      $albumArtist.text(album.artist);
      $albumReleaseInfo.text(album.year + ' ' + album.label);
@@ -79,20 +76,19 @@ var setCurrentAlbum = function(album) {
          var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
          $albumSongList.append($newRow);
      }
-};
+ };
 
-var trackIndex = function(album, song) {
+ var trackIndex = function(album, song) {
      return album.songs.indexOf(song);
-};
+ };
 
-var updatePlayerBarSong = function() {
+ var updatePlayerBarSong = function() {
 
     $('.currently-playing .song-name').text(currentSongFromAlbum.title);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
 
     $('.main-controls .play-pause').html(playerBarPauseButton);
-
 };
 
 var nextSong = function() {
@@ -156,7 +152,6 @@ var previousSong = function() {
  var playerBarPauseButton = '<span class="ion-pause"></span>';
  
  // Store state of playing songs
- 
  var currentAlbum = null;
  var currentlyPlayingSongNumber = null;
  var currentSongFromAlbum = null;
@@ -164,12 +159,11 @@ var previousSong = function() {
  var $previousButton = $('.main-controls .previous');
  var $nextButton = $('.main-controls .next');
 
- $(document).ready(function() {
+$(document).ready(function() {
      setCurrentAlbum(albumPicasso);
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
- });
-
+});
 
      var albums = [albumPicasso, albumMarconi, albumPanini];
      var index = 1;
@@ -180,4 +174,3 @@ var previousSong = function() {
             index = 0;
         }
      });
-};
