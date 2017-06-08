@@ -46,7 +46,7 @@ var albumPicasso = {
  };
 
  var createSongRow = function(songNumber, songName, songLength) {
-    var template =
+     var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
@@ -54,9 +54,9 @@ var albumPicasso = {
       + '</tr>'
       ;
  
-    var $row = $(template);
+     var $row = $(template);
 
-    var clickHandler = function() {
+     var clickHandler = function() {
         var songNumber = $(this).attr('data-song-number');
 
         if (currentlyPlayingSong !== null) {
@@ -73,43 +73,38 @@ var albumPicasso = {
             $(this).html(playButtonTemplate);
             currentlyPlayingSong = null;
         }
-    };
+     };
 
-    var onHover = function(event) {
+     var onHover = function(event) {
         var songNumberCell = $(this).find('.song-item-number');
         var songNumber = songNumberCell.attr('data-song-number');
 
         if (songNumber !== currentlyPlayingSong) {
             songNumberCell.html(playButtonTemplate);
         }
-    };
+     };
 
-    var offHover = function(event) {
+     var offHover = function(event) {
         var songNumberCell = $(this).find('.song-item-number');
         var songNumber = songNumberCell.attr('data-song-number');
 
         if (songNumber !== currentlyPlayingSong) {
             songNumberCell.html(songNumber);
         }
-    };
+     };
 
      $row.find('.song-item-number').click(clickHandler);
      $row.hover(onHover, offHover);
      return $row;
  };
 
-// Select elements that we want to populate with text dynamically
-
-var $albumTitle = $('.album-view-title');
-var $albumArtist = $('.album-view-artist');
-var $albumReleaseInfo = $('.album-view-release-info');
-var $albumImage = $('.album-cover-art');
-var $albumSongList = $('.album-view-song-list');
-
-
 var setCurrentAlbum = function(album) {
+     var $albumTitle = $('.album-view-title');
+     var $albumArtist = $('.album-view-artist');
+     var $albumReleaseInfo = $('.album-view-release-info');
+     var $albumImage = $('.album-cover-art');
+     var $albumSongList = $('.album-view-song-list');
 
-     // Assign value to each part of the album (text, images...)
      $albumTitle.text(album.title);
      $albumArtist.text(album.artist);
      $albumReleaseInfo.text(album.year + ' ' + album.label);
@@ -123,7 +118,7 @@ var setCurrentAlbum = function(album) {
          var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
          $albumSongList.append($newRow);
      }
-};
+ };
 
  // Album button templates
  var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
@@ -132,10 +127,9 @@ var setCurrentAlbum = function(album) {
  // Store state of playing songs
  var currentlyPlayingSong = null;
 
- $(document).ready(function() {
+$(document).ready(function() {
      setCurrentAlbum(albumPicasso);
- });
-
+});
 
      var albums = [albumPicasso, albumMarconi, albumPanini];
      var index = 1;
@@ -146,4 +140,3 @@ var setCurrentAlbum = function(album) {
             index = 0;
         }
      });
-};
